@@ -15,19 +15,19 @@
 
     /* Typography */
     --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
-    --font-size-base: clamp(1.4rem, 1.5vw, 1.6rem);
-    --font-size-h1: clamp(3.2rem, 5vw, 4.8rem);
-    --font-size-h2: clamp(2.8rem, 4vw, 3.6rem);
-    --font-size-h3: clamp(2rem, 3vw, 2.4rem);
+    --font-size-base: 1.4rem;
+    --font-size-h1: 2.8rem;
+    --font-size-h2: 2.4rem;
+    --font-size-h3: 2rem;
     --line-height-base: 1.6;
     --line-height-heading: 1.2;
 
     /* Spacing */
     --spacing-xs: 0.8rem;
-    --spacing-sm: 1.6rem;
-    --spacing-md: 2.4rem;
-    --spacing-lg: 3.2rem;
-    --spacing-xl: 4.8rem;
+    --spacing-sm: 1.2rem;
+    --spacing-md: 1.6rem;
+    --spacing-lg: 2.4rem;
+    --spacing-xl: 3.2rem;
 
     /* Transitions */
     --transition-fast: 0.3s ease;
@@ -51,6 +51,16 @@
     /* Light color for dark backgrounds */
     --color-text-hover-on-dark: var(--color-accent);
     /* Hover state on dark backgrounds */
+
+    /* Mobile-first base sizes */
+    --container-padding: 2rem;
+    --section-padding: 4rem;
+
+    /* Container widths */
+    --container-sm: 100%;
+    --container-md: 72rem;
+    --container-lg: 96rem;
+    --container-xl: 120rem;
 }
 
 /* Update text colors for dark backgrounds */
@@ -117,58 +127,27 @@ body {
     top: 0;
     left: 0;
     width: 100%;
+    height: 8rem;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 107, 74, 0.1);
     z-index: 1000;
-    height: 12rem;
-    padding-top: 1rem;
 }
 
 .nav-container {
-    max-width: 1440px;
+    max-width: var(--container-xl);
     margin: 0 auto;
-    padding: 0 4rem;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
-    height: 100%;
 }
-
-/* .footer-content .logo {
-    position: relative;
-    z-index: 1001;
-    padding: 1rem;
-    background: var(--color-background);
-    border-radius: 0.8rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    margin-top: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.logo {
-    position: relative;
-    z-index: 1001;
-    padding: 1rem;
-    background: var(--color-background);
-    border-radius: 0.8rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    margin-top: 1rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-} */
 
 .logo-img {
-    height: 11rem;
+    height: 8rem;
     width: auto;
-    transition: transform 0.3s ease;
-    display: block;
     padding: 1rem;
 }
-
-/* .logo-img:hover {
-    transform: scale(1.05);
-} */
 
 .nav-menu {
     display: flex;
@@ -280,13 +259,11 @@ body {
 }
 
 .mobile-menu-btn {
-    display: none;
-    flex-direction: column;
-    gap: 0.6rem;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.8rem;
+    position: relative;
+    z-index: 1002;
+    padding: var(--spacing-sm);
+    margin-right: -var(--spacing-sm);
+    /* Prevent overflow */
 }
 
 .mobile-menu-btn span {
@@ -299,19 +276,18 @@ body {
 
 /* Professional Carousel Design */
 .hero-section {
-    height: auto;
-    min-height: 100vh;
-    margin-top: 12rem;
-    padding: 6rem 0;
-    background: linear-gradient(to right, #1a1a1a, #2d2d2d);
+    margin-top: 8rem;
+    padding: var(--section-padding) 0;
     position: relative;
-    overflow: hidden;
 }
 
 .hero-slide {
-    grid-template-columns: 1fr;
-    padding: 2rem;
-    gap: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
 }
 
 .slide-content {
@@ -353,16 +329,13 @@ body {
 
 @media (min-width: 1024px) {
     .hero-slide {
-        grid-template-columns: 1fr 1fr;
-        padding: 0 8rem;
+        flex-direction: row;
+        align-items: center;
     }
 
-    .slide-content {
-        text-align: left;
-    }
-
-    .slide-description {
-        margin: 0 0 4rem;
+    .slide-content,
+    .slide-image {
+        flex: 1;
     }
 }
 
@@ -458,10 +431,12 @@ body {
 /* Carousel Navigation */
 .carousel-nav {
     position: absolute;
-    bottom: 4.8rem;
-    left: 8rem;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     gap: 1.2rem;
+    z-index: 2;
 }
 
 .carousel-dot {
@@ -850,7 +825,7 @@ body {
 
 /* Products Showcase Styling */
 .products-showcase {
-    padding: 12rem 0;
+    padding: var(--section-padding) var(--container-padding);
     background: var(--color-surface);
 }
 
@@ -862,7 +837,7 @@ body {
 }
 
 .product-category {
-    margin-bottom: 4.8rem;
+    margin-bottom: var(--spacing-xl);
 }
 
 .product-category h3 {
@@ -873,8 +848,9 @@ body {
 
 .product-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(36rem, 1fr));
-    gap: 3.2rem;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) 0;
 }
 
 .product-card {
@@ -1102,43 +1078,45 @@ body {
 
 /* Modern Projects Showcase */
 .projects-showcase {
-    padding: 12rem 0;
-    background: var(--color-background);
+    padding: var(--section-padding) var(--container-padding);
+    overflow: hidden;
 }
 
 .projects-filter {
     display: flex;
-    justify-content: center;
-    gap: 1.6rem;
-    margin-bottom: 4.8rem;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+    padding: 0 var(--spacing-sm);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
 
-.filter-btn {
-    padding: 1.2rem 2.4rem;
-    border: none;
-    background: none;
-    font-size: 1.6rem;
-    color: var(--color-text-light);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 3rem;
-}
-
-.filter-btn.active {
-    background: var(--color-primary);
-    color: var(--color-background);
-}
-
-.filter-btn:hover:not(.active) {
-    color: var(--color-primary);
+.projects-filter::-webkit-scrollbar {
+    display: none;
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 3.2rem;
-    max-width: 140rem;
-    margin: 0 auto;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+}
+
+@media (min-width: 768px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .projects-filter {
+        justify-content: center;
+        overflow-x: visible;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .project-card {
@@ -1346,41 +1324,21 @@ body {
 /* Responsive adjustments */
 @media screen and (max-width: 1024px) {
     .main-header {
-        height: 10rem;
-    }
-
-    .logo {
-        padding: 0.8rem;
-        margin-top: 0.8rem;
+        height: 7rem;
     }
 
     .logo-img {
-        height: 9rem;
-        padding: 0.8rem;
-    }
-
-    .nav-menu {
-        padding-left: 10rem;
+        height: 7rem;
     }
 }
 
 @media screen and (max-width: 768px) {
     .main-header {
-        height: 9rem;
-    }
-
-    .logo {
-        padding: 0.6rem;
-        margin-top: 0.6rem;
+        height: 6rem;
     }
 
     .logo-img {
-        height: 7rem;
-        padding: 0.6rem;
-    }
-
-    .nav-menu {
-        padding-left: 0;
+        height: 6rem;
     }
 }
 
@@ -1826,4 +1784,153 @@ h6 {
 .carousel-nav button:hover {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Tablet breakpoint */
+@media (min-width: 768px) {
+    :root {
+        --font-size-base: 1.5rem;
+        --font-size-h1: 3.6rem;
+        --font-size-h2: 3rem;
+        --font-size-h3: 2.4rem;
+        --container-padding: 3rem;
+        --section-padding: 6rem;
+    }
+}
+
+/* Desktop breakpoint */
+@media (min-width: 1024px) {
+    :root {
+        --font-size-base: 1.6rem;
+        --font-size-h1: 4.8rem;
+        --font-size-h2: 3.6rem;
+        --font-size-h3: 2.8rem;
+        --container-padding: 4rem;
+        --section-padding: 8rem;
+    }
+}
+
+.hero-slide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+    max-width: var(--container-xl);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+.slide-image {
+    aspect-ratio: 16/9;
+    height: 40rem;
+    overflow: hidden;
+    border-radius: 1.2rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.slide-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-nav {
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1.2rem;
+    z-index: 2;
+}
+
+@media screen and (max-width: 1024px) {
+    .hero-slide {
+        grid-template-columns: 1fr;
+    }
+
+    .slide-image {
+        height: 35rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .slide-image {
+        height: 25rem;
+    }
+}
+
+.projects-showcase {
+    padding: var(--section-padding) var(--container-padding);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(28rem, 1fr));
+    gap: 2.4rem;
+    max-width: var(--container-xl);
+    margin: 0 auto;
+}
+
+.project-card {
+    background: var(--color-surface);
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+}
+
+.project-image {
+    aspect-ratio: 16/9;
+    height: 24rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1.6rem;
+    margin-bottom: 4rem;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+}
+
+.filter-btn {
+    padding: 1rem 2rem;
+    border: 1px solid var(--color-text-light);
+    border-radius: 3rem;
+    background: none;
+    color: var(--color-text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background: var(--color-primary);
+    color: var(--color-background);
+    border-color: var(--color-primary);
+}
+
+@media screen and (max-width: 1024px) {
+    .project-image {
+        height: 20rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .project-image {
+        height: 18rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+        gap: 2rem;
+    }
 }
